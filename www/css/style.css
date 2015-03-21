@@ -1,8 +1,4 @@
 /* Empty. Add your own CSS if you like */
 #map {
-  height: 100vh;
-}
-
-#map canvas {
-  height: 100vh;
+  height: 100%;
 }
