@@ -1,10 +1,8 @@
 angular.module('starter.controllers')
 
-  .controller('AppCtrl', function($scope, $ionicModal, $timeout, $firebaseAuth) {
+  .controller('AppCtrl', function($scope, $ionicModal, $timeout, firebaseAuth) {
     // Form data for the login modal
     $scope.loginData = {};
-    var ref = new Firebase('https://flickering-fire-3819.firebaseio.com');
-    $scope.auth = $firebaseAuth(ref);
 
     // Initially set no user to be logged in
     $scope.user = null;
@@ -28,7 +26,7 @@ angular.module('starter.controllers')
 
     // Perform the login action when the user submits the login form
     $scope.doLogin = function() {
-      $scope.auth.$authWithPassword($scope.loginData)
+      firebaseAuth.$authWithPassword($scope.loginData)
         .then(function(authData) {
           $scope.closeLogin();
         }, function(e) {
@@ -37,10 +35,10 @@ angular.module('starter.controllers')
     };
 
     $scope.logout = function() {
-      $scope.auth.$unauth();
+      firebaseAuth.$unauth();
     };
 
-    $scope.auth.$onAuth(function(authData) {
+    firebaseAuth.$onAuth(function(authData) {
       $scope.user = authData;
     });
 
