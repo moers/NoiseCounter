@@ -14,21 +14,21 @@
 
   <ion-side-menu side="left">
     <ion-header-bar class="bar-stable">
-      <h1 class="title">Left</h1>
+      <h1 class="title">Menü</h1>
     </ion-header-bar>
     <ion-content>
       <ion-list>
         <ion-item nav-clear menu-close ng-click="openLogin()" ng-if="!user">
-          Login
+          Anmelden
         </ion-item>
         <ion-item nav-clear menu-close href="#/app/map">
-          Map
+          Karte
         </ion-item>
         <ion-item nav-clear menu-close href="#/app/list">
-          List
+          Liste
         </ion-item>
         <ion-item nav-clear menu-close ng-click="logout()" ng-if="user">
-          Logout
+          Abmelden
         </ion-item>
       </ion-list>
     </ion-content>

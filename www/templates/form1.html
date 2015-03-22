@@ -1,0 +1,33 @@
+<ion-view view-title="Datenerfassung">
+    <ion-content>
+        <div class="row">
+            <p class="col">
+                Bitte erzähle uns, wie laut du es gerade an deinem Ort findest:
+            </p>
+        </div>
+        <div class="row">
+            <p class="col">Leise</p>
+            <p class="col" style="text-align: center;">Aushaltbar</p>
+            <p class="col" style="text-align: right;">Laut</p>
+        </div>
+        <div class="range">
+          <input type="range" name="noicelevel" ng-model="level" min="1" max="3">
+        </div>
+
+        <div class="row">
+            <p class="col" style="text-align: center">
+                Es ist <ng-pluralize count="level" when="{
+                '0': '',
+                '1': 'leise',
+                '2': 'aushaltbar',
+                '3': 'laut'
+                }"
+            </p>
+        </div>
+
+        <button class="button button-block button-positive" ng-click="save(level)">
+          Absenden
+        </button>
+
+    </ion-content>
+</ion-view>
