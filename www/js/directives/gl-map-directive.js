@@ -17,6 +17,56 @@ angular.module('starter.directives')
                     center: scope.center,
                     zoom: scope.zoom
                 });
+                level=[
+                    {
+                        "title": "",
+                        "marker-symbol": "marker"
+                    },{
+                        "title": "Läuft...",
+                        "marker-symbol": "circle-stroked"
+                    },{
+                        "title": "Geht...",
+                        "marker-symbol": "square-stroked"
+                    },{
+                        "title": "LAUT",
+                        "marker-symbol": "triangle-stroked"
+                    }
+                ];
+                points= [
+                    {
+                        'level': 1,
+                        'point': {
+                            'lat': 51.44136533868161,
+                            'lng': 6.66652310831409
+                        },
+                        "user":"Ich1",
+                        "$id":'ick bin eene unique id1',
+                        "$priority":null
+
+                    },
+                    {
+                        'level': 2,
+                        'point': {
+                            'lat': 51.45136533868161,
+                            'lng': 6.65652310831409
+                        },
+                        "user":"Ich2",
+                        "$id":'ick bin eene unique id2',
+                        "$priority":null
+
+                    },
+                    {
+                        'level': 3,
+                        'point': {
+                            'lat': 51.46136533868161,
+                            'lng': 6.67652310831409
+                        },
+                        "user":"Ich3",
+                        "$id":'ick bin eene unique id3',
+                        "$priority":null
+
+                    }
+                ];
 
                 map.on('moveend', function () {
                     var center = map.getCenter();
@@ -27,55 +77,29 @@ angular.module('starter.directives')
                     scope.$apply();
                 });
                 map.on('style.load', function () {
-                    map.addSource("markers", {
-                        "type": "geojson",
-                        "data": {
-                            "type": "FeatureCollection",
-                            "features": [{
+                    features = [];
+                    points.forEach(function(vote) {
+                        features.push(
+                            {
                                 "type": "Feature",
                                 "geometry": {
                                     "type": "MultiPoint",
                                     "coordinates": [
                                         [
-                                            6.66652310831409,
-                                            51.44136533868161
+                                            vote.point.lng,
+                                            vote.point.lat
                                         ]
                                     ]
                                 },
-                                "properties": {
-                                    "title": "Läuft...",
-                                    "marker-color": "#00ff00",
-                                    "marker-symbol": "circle-stroked"
-                                }
-                            }, {
-                                "type": "Feature",
-                                "geometry": {
-                                    "type": "Point",
-                                    "coordinates": [
-                                        6.668627159488535,
-                                        51.446047256345975
-                                    ]
-                                },
-                                "properties": {
-                                    "title": "Geht so",
-                                    "marker-color": "#FFff00",
-                                    "marker-symbol": "square-stroked"
-                                }
-                            }, {
-                                "type": "Feature",
-                                "geometry": {
-                                    "type": "Point",
-                                    "coordinates": [
-                                        6.668627159488535,
-                                        51.456047256345975
-                                    ]
-                                },
-                                "properties": {
-                                    "title": "Ohrenschmerzen",
-                                    "marker-color": "#FF0000",
-                                    "marker-symbol": "triangle-stroked"
-                                }
-                            }]
+                                "properties": level[vote.level]
+                            }
+                        );
+                    });
+                    map.addSource("markers", {
+                        "type": "geojson",
+                        "data": {
+                            "type": "FeatureCollection",
+                            "features": features
                         }
                     });
                     map.addLayer({
